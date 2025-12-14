@@ -1,0 +1,7 @@
+{
+  "start": {
+    "message": "¡PRESIONA CUALQUIER TECLA PARA EMPEZAR!",
+    "next": "menu.html",
+    "fadeMs": 450
+  }
+}

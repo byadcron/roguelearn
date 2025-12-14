@@ -1,0 +1,65 @@
+:root{
+  --fade-ms: 450ms;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+
+body{
+  background: #000;
+  color: #fff;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* Fondo estilo “espacio” simple (sin imagen) */
+.screen{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;     /* centra vertical */
+  justify-content: center; /* centra horizontal */
+  text-align: center;
+  padding: 24px;
+  position: relative;
+
+  /* estrellas */
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.9) 1px, transparent 2px),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,.7) 1px, transparent 2px),
+    radial-gradient(circle at 40% 80%, rgba(255,255,255,.8) 1px, transparent 2px),
+    radial-gradient(circle at 90% 70%, rgba(255,255,255,.6) 1px, transparent 2px),
+    #000;
+  background-size: 320px 320px, 420px 420px, 520px 520px, 620px 620px;
+}
+
+/* Texto centrado */
+.start-text{
+  font-size: clamp(14px, 2.2vw, 28px);
+  line-height: 1.6;
+  letter-spacing: 1px;
+  text-shadow:
+    2px 2px 0 #1e3a8a,
+    -2px 2px 0 #1e3a8a,
+    2px -2px 0 #1e3a8a,
+    -2px -2px 0 #1e3a8a,
+    0 0 10px rgba(255,200,0,.35);
+}
+
+/* Parpadeo estilo “press any key” */
+.blink{
+  animation: blink 1s steps(2, end) infinite;
+}
+
+@keyframes blink{
+  50%{ opacity: .25; }
+}
+
+/* Transición al menú */
+.fade-out{
+  animation: fadeOut var(--fade-ms) linear forwards;
+}
+
+@keyframes fadeOut{
+  to{ opacity: 0; }
+}
