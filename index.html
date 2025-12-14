@@ -1,95 +1,144 @@
 <!doctype html>
+<!-- DOCTYPE: indica HTML5 -->
 <html lang="es">
+<!-- lang="es": idioma del documento -->
 <head>
+  <!-- charset UTF-8: soporta tildes, ñ, símbolos -->
   <meta charset="utf-8" />
+
+  <!-- viewport: hace que se adapte a celular/PC correctamente -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- título de la pestaña -->
   <title>Inicio</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- enlace a tu CSS (en tu proyecto se llama style.css) -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="start-body">
+  <!--
+    main: contenedor principal de la pantalla
+    id="screen": lo usamos en JS para aplicarle el fade-out al cambiar de página
+  -->
   <main id="screen" class="start-screen" aria-label="Pantalla de inicio">
-    <!-- Video de fondo -->
+
+    <!--
+      video de fondo:
+      autoplay + muted: permite autoplay en la mayoría de navegadores
+      loop: se repite
+      playsinline: evita fullscreen forzado en móvil
+    -->
     <video id="startVideo" class="bg-video" autoplay muted loop playsinline preload="auto">
+      <!-- source: archivo mp4 real -->
       <source src="./assets/inicio.mp4" type="video/mp4" />
+      <!-- texto fallback si no soporta video -->
+      Tu navegador no soporta video.
     </video>
 
-    <!-- Capa oscura opcional para mejorar lectura -->
-    <div class="overlay-dim"></div>
+    <!-- capa oscura para mejorar contraste (si el video es claro) -->
+    <div class="overlay-dim" aria-hidden="true"></div>
 
-    <!-- Contenido centrado -->
-<div class="start-center">
-  <div class="start-panel">
-    <img id="startImg" class="start-img" src="./assets/empezar.png"
-         alt="Presiona cualquier tecla para empezar" draggable="false" />
-    <p id="startText" class="start-text"></p>
-  </div>
-</div>
+    <!--
+      contenedor del overlay (imagen "empezar.png")
+      data-pos: posición del overlay (center/bottom)
+    -->
+    <div id="startUI" class="start-ui" data-pos="bottom">
+      <!-- imagen del “presiona cualquier tecla” -->
+      <img
+        id="startImg"
+        class="start-img blink"
+        src="./assets/empezar.png"
+        alt="¡Presiona cualquier tecla para empezar!"
+        draggable="false"
+      />
+    </div>
+  </main>
 
   <script>
-    // Defaults (por si config.json no carga)
+    /*
+      ===========================
+      JS: Lógica de la pantalla
+      ===========================
+      1) Carga config.json (si existe)
+      2) Aplica video + overlayImage + posición
+      3) Escucha tecla/clic/tap
+      4) Hace fade-out y navega a menu.html
+    */
+
+    // Config por defecto (por si falla leer config.json)
     let cfg = {
       start: {
         video: "./assets/inicio.mp4",
         overlayImage: "./assets/empezar.png",
-        overlayText: "",
+        overlayPosition: "bottom",
         next: "menu.html",
         fadeMs: 450
       }
     };
 
+    // bandera para no disparar dos veces la transición
     let started = false;
 
+    // función: cargar config.json desde el servidor (Live Server / Python / GitHub Pages)
     async function loadConfig() {
       try {
+        // fetch pide el archivo; cache no-store evita cache cuando estás editando
         const r = await fetch("./config.json", { cache: "no-store" });
+
+        // si la respuesta está bien (200-299), parsea JSON
         if (r.ok) cfg = await r.json();
-      } catch (_) {}
-    }
-
-    function applyConfig() {
-      const s = cfg.start || {};
-      const video = document.getElementById("startVideo");
-      const img = document.getElementById("startImg");
-      const text = document.getElementById("startText");
-
-      // Video
-      const src = (s.video || "./assets/inicio.mp4");
-      video.querySelector("source").src = src;
-      video.load();
-
-      // PNG encima
-      img.src = s.overlayImage || "./assets/empezar.png";
-
-      // Texto opcional
-      const t = (s.overlayText || "").trim();
-      if (t) {
-        text.textContent = t;
-        text.style.display = "block";
-      } else {
-        text.style.display = "none";
+      } catch (e) {
+        // si falla, nos quedamos con defaults
       }
     }
 
+    // función: aplica la config a los elementos del DOM (video + imagen + posición)
+    function applyStartConfig() {
+      // s = sección start
+      const s = cfg.start || {};
+
+      // obtener elementos
+      const videoEl = document.getElementById("startVideo");
+      const sourceEl = videoEl.querySelector("source");
+      const imgEl = document.getElementById("startImg");
+      const uiEl = document.getElementById("startUI");
+
+      // asignar video (si no viene, usar default)
+      sourceEl.src = s.video || "./assets/inicio.mp4";
+      videoEl.load(); // recarga el video con el nuevo src
+
+      // asignar imagen overlay
+      imgEl.src = s.overlayImage || "./assets/empezar.png";
+
+      // posición del overlay: "center" o "bottom"
+      uiEl.dataset.pos = (s.overlayPosition || "bottom");
+    }
+
+    // función: transicionar y cambiar a la siguiente pantalla
     function goNext() {
-      if (started) return;
+      if (started) return; // evita doble ejecución
       started = true;
 
+      // tomar la pantalla y aplicar clase de fade-out
       const screen = document.getElementById("screen");
       screen.classList.add("fade-out");
 
+      // duración del fade según config
       const ms = Number(cfg?.start?.fadeMs ?? 450);
+
+      // luego del fade, navegar a la página destino
       setTimeout(() => {
         window.location.href = cfg?.start?.next || "menu.html";
       }, ms);
     }
 
-    // Inicia
+    // auto-ejecutado al cargar la página
     (async () => {
-      await loadConfig();
-      applyConfig();
+      await loadConfig();       // 1) cargar config
+      applyStartConfig();       // 2) aplicar a pantalla
 
-      // Input: cualquier tecla / clic / tap
+      // 3) eventos de entrada: cualquier tecla o click/tap
       window.addEventListener("keydown", goNext, { once: true });
       window.addEventListener("pointerdown", goNext, { once: true });
     })();

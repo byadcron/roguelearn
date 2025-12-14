@@ -4,18 +4,37 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menú</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Placeholder simple */
+    html,body{height:100%;margin:0}
+    body{display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-family:system-ui}
+  </style>
 </head>
-<body class="menu-body">
-  <main class="menu-wrap">
-    <h1 class="menu-title">MENÚ PRINCIPAL</h1>
-    <p class="menu-note">Aquí vas a poner tus otras imágenes del menú.</p>
-
-    <div class="menu-buttons">
-      <button class="menu-btn">Jugar</button>
-      <button class="menu-btn">Opciones</button>
-      <button class="menu-btn">Salir</button>
-    </div>
-  </main>
+<body>
+  <h2>MENÚ PRINCIPAL (aquí van tus imágenes)</h2>
 </body>
 </html>
+
+    >
+      <source src="assets/inicio.mp4" type="video/mp4" />
+      <!-- Texto alternativo si el video no se carga -->
+      Tu navegador no soporta la reproducción de videos.
+    </video>
+
+    <!--
+      BOTÓN DE INICIO
+      - id="startButton": para manipularlo con JS.
+      - class="start-button": estilos del botón.
+      - aria-label: mejora accesibilidad (lector de pantalla).
+    -->
+    <button
+      id="startButton"
+      class="start-button"
+      aria-label="Iniciar aplicación"
+    >
+      Iniciar
+    </button>
+  </main>
+
+  <!-- Enlace al JS -->
+  <script src="script.js"></script>
