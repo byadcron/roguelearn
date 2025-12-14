@@ -4,52 +4,97 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio</title>
-
-  <!-- Pixel font (opcional, pero queda muy bien) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
-  <main id="screen" class="screen">
-    <h1 id="startText" class="start-text blink">Cargando...</h1>
-  </main>
+<body class="start-body">
+  <main id="screen" class="start-screen" aria-label="Pantalla de inicio">
+    <!-- Video de fondo -->
+    <video id="startVideo" class="bg-video" autoplay muted loop playsinline preload="auto">
+      <source src="./assets/inicio.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Capa oscura opcional para mejorar lectura -->
+    <div class="overlay-dim"></div>
+
+    <!-- Contenido centrado -->
+<div class="start-center">
+  <div class="start-panel">
+    <img id="startImg" class="start-img" src="./assets/empezar.png"
+         alt="Presiona cualquier tecla para empezar" draggable="false" />
+    <p id="startText" class="start-text"></p>
+  </div>
+</div>
+
+
 
   <script>
-    let cfg = null;
+    // Defaults (por si config.json no carga)
+    let cfg = {
+      start: {
+        video: "./assets/inicio.mp4",
+        overlayImage: "./assets/empezar.png",
+        overlayText: "",
+        next: "menu.html",
+        fadeMs: 450
+      }
+    };
+
     let started = false;
 
     async function loadConfig() {
-      const res = await fetch("./config.json", { cache: "no-store" });
-      cfg = await res.json();
-      document.getElementById("startText").textContent = cfg.start.message;
+      try {
+        const r = await fetch("./config.json", { cache: "no-store" });
+        if (r.ok) cfg = await r.json();
+      } catch (_) {}
+    }
+
+    function applyConfig() {
+      const s = cfg.start || {};
+      const video = document.getElementById("startVideo");
+      const img = document.getElementById("startImg");
+      const text = document.getElementById("startText");
+
+      // Video
+      const src = (s.video || "./assets/inicio.mp4");
+      video.querySelector("source").src = src;
+      video.load();
+
+      // PNG encima
+      img.src = s.overlayImage || "./assets/empezar.png";
+
+      // Texto opcional
+      const t = (s.overlayText || "").trim();
+      if (t) {
+        text.textContent = t;
+        text.style.display = "block";
+      } else {
+        text.style.display = "none";
+      }
     }
 
     function goNext() {
-      if (started || !cfg) return;
+      if (started) return;
       started = true;
 
       const screen = document.getElementById("screen");
       screen.classList.add("fade-out");
 
-      const ms = Number(cfg.start.fadeMs ?? 400);
+      const ms = Number(cfg?.start?.fadeMs ?? 450);
       setTimeout(() => {
-        window.location.href = cfg.start.next || "menu.html";
+        window.location.href = cfg?.start?.next || "menu.html";
       }, ms);
     }
 
-    // Cualquier tecla / click / tap
-    window.addEventListener("keydown", goNext, { once: true });
-    window.addEventListener("pointerdown", goNext, { once: true });
+    // Inicia
+    (async () => {
+      await loadConfig();
+      applyConfig();
 
-    loadConfig().catch(() => {
-      document.getElementById("startText").textContent =
-        "¡PRESIONA CUALQUIER TECLA PARA EMPEZAR!";
-      cfg = { start: { next: "menu.html", fadeMs: 450 } };
-    });
+      // Input: cualquier tecla / clic / tap
+      window.addEventListener("keydown", goNext, { once: true });
+      window.addEventListener("pointerdown", goNext, { once: true });
+    })();
   </script>
 </body>
 </html>

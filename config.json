@@ -1,6 +1,8 @@
 {
   "start": {
-    "message": "¡PRESIONA CUALQUIER TECLA PARA EMPEZAR!",
+    "video": "./assets/inicio.mp4",
+    "overlayImage": "./assets/empezar.png",
+    "overlayText": "",
     "next": "menu.html",
     "fadeMs": 450
   }

@@ -1,65 +1,48 @@
-:root{
-  --fade-ms: 450ms;
+.bg-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
-
-body{
-  background: #000;
-  color: #fff;
-  font-family: "Press Start 2P", system-ui, sans-serif;
-  overflow: hidden;
+/* oscurece más para que se lea el texto del PNG */
+.overlay-dim{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 1;
 }
 
-/* Fondo estilo “espacio” simple (sin imagen) */
-.screen{
-  width: 100vw;
-  height: 100vh;
+.start-center{
+  position: absolute;
+  inset: 0;
   display: flex;
-  align-items: center;     /* centra vertical */
-  justify-content: center; /* centra horizontal */
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 24px;
-  position: relative;
-
-  /* estrellas */
-  background:
-    radial-gradient(circle at 10% 20%, rgba(255,255,255,.9) 1px, transparent 2px),
-    radial-gradient(circle at 70% 30%, rgba(255,255,255,.7) 1px, transparent 2px),
-    radial-gradient(circle at 40% 80%, rgba(255,255,255,.8) 1px, transparent 2px),
-    radial-gradient(circle at 90% 70%, rgba(255,255,255,.6) 1px, transparent 2px),
-    #000;
-  background-size: 320px 320px, 420px 420px, 520px 520px, 620px 620px;
+  z-index: 2;
 }
 
-/* Texto centrado */
-.start-text{
-  font-size: clamp(14px, 2.2vw, 28px);
-  line-height: 1.6;
-  letter-spacing: 1px;
-  text-shadow:
-    2px 2px 0 #1e3a8a,
-    -2px 2px 0 #1e3a8a,
-    2px -2px 0 #1e3a8a,
-    -2px -2px 0 #1e3a8a,
-    0 0 10px rgba(255,200,0,.35);
+/* panel para asegurar contraste */
+.start-panel{
+  background: rgba(0,0,0,.35);
+  padding: 18px 22px;
+  border-radius: 16px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
-/* Parpadeo estilo “press any key” */
-.blink{
-  animation: blink 1s steps(2, end) infinite;
-}
+.start-img{
+  width: min(900px, 90vw);
+  height: auto;
+  image-rendering: pixelated;
 
-@keyframes blink{
-  50%{ opacity: .25; }
-}
-
-/* Transición al menú */
-.fade-out{
-  animation: fadeOut var(--fade-ms) linear forwards;
-}
-
-@keyframes fadeOut{
-  to{ opacity: 0; }
+  /* sombras para que el texto del PNG sea legible */
+  filter:
+    drop-shadow(0 2px 0 rgba(0,0,0,.95))
+    drop-shadow(0 0 10px rgba(0,0,0,.85))
+    drop-shadow(0 0 18px rgba(0,0,0,.65));
 }
