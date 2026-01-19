@@ -1,21 +1,9 @@
-
-{
-  "start": {
-    "video": "./assets/inicio.mp4",
-    "overlayImage": "./assets/empezar.png",
-    "overlayPosition": "center",
-    "next": "menu.html",
-    "fadeMs": 450
-  },
-  "menu": {
-    "video": "./assets/hallway_loop.mp4",
-    "logo": "./assets/roguelearn.png",
-    "fadeMs": 300,
-    "buttons": [
-      { "id": "play", "image": "./assets/jugar.png", "href": "game.html" },
-      { "id": "items", "image": "./assets/objetos.png", "href": "#" },
-      { "id": "options", "image": "./assets/opciones.png", "href": "#" },
-      { "id": "exit", "image": "./assets/salir.png", "href": "#" }
-    ]
+  {
+    "start": {
+      "video": "./assets/inicio.mp4",
+      "overlayImage": "./assets/empezar.png",
+      "overlayText": "",
+      "next": "menu.html",
+      "fadeMs": 450
+    }
   }
-}

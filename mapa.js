@@ -1,4 +1,3 @@
-/* ================= CONFIG ================= */
 const TILE = 16;
 const FOV = Math.PI / 3;
 const RAY_STEP = 1;
@@ -19,7 +18,6 @@ const MAP = [
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
 
-/* ================= PLAYER ================= */
 const player = {
   x: TILE * 7,
   y: TILE * 4,
@@ -27,7 +25,6 @@ const player = {
   speed: 1.8
 };
 
-/* ================= CANVAS ================= */
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const mini = document.getElementById("minimap");
@@ -40,7 +37,6 @@ function resize(){
 addEventListener("resize", resize);
 resize();
 
-/* ================= INPUT ================= */
 const keys = {};
 addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
 addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
@@ -52,7 +48,6 @@ document.addEventListener("mousemove", e => {
   }
 });
 
-/* ================= HELPERS ================= */
 function tileAt(x,y){
   return MAP[Math.floor(y/TILE)]?.[Math.floor(x/TILE)];
 }
@@ -60,7 +55,6 @@ function isSolid(t){
   return t === 1;
 }
 
-/* ================= PUERTAS ================= */
 addEventListener("keydown", e => {
   if (e.key === "e") {
     const fx = player.x + Math.cos(player.a)*30;
@@ -71,7 +65,6 @@ addEventListener("keydown", e => {
   }
 });
 
-/* ================= UPDATE ================= */
 function update(){
   let nx = player.x;
   let ny = player.y;
@@ -87,7 +80,6 @@ function update(){
   }
 }
 
-/* ================= RENDER ================= */
 function draw3D(){
   ctx.fillStyle="#87CEEB";
   ctx.fillRect(0,0,canvas.width,canvas.height/2);
@@ -117,14 +109,12 @@ function draw3D(){
 
     ctx.fillRect(x,y,1,h);
 
-    // VENTANA CON LETRERO EMPOTRADO
     if (t===4 && cd < 160) {
       ctx.fillStyle="rgba(0,0,0,.6)";
       ctx.fillRect(x,y+h*0.4,1,h*0.2);
     }
   }
 
-  // TEXTO DEL LETRERO (UNA SOLA VEZ)
   const fx = player.x + Math.cos(player.a)*40;
   const fy = player.y + Math.sin(player.a)*40;
   if(tileAt(fx,fy)===4){
@@ -137,7 +127,6 @@ function draw3D(){
   }
 }
 
-/* ================= MINIMAPA ================= */
 function drawMiniMap(){
   mctx.clearRect(0,0,mini.width,mini.height);
   const s = mini.width/(MAP[0].length*TILE);
@@ -158,7 +147,6 @@ function drawMiniMap(){
   mctx.fill();
 }
 
-/* ================= LOOP ================= */
 function loop(){
   update();
   draw3D();

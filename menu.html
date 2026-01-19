@@ -1,40 +1,47 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Menú</title>
-  <style>
-    /* Placeholder simple */
-    html,body{height:100%;margin:0}
-    body{display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-family:system-ui}
-  </style>
+  <link rel="stylesheet" href="style_menu.css">
 </head>
-<body>
-  <h2>MENÚ PRINCIPAL (aquí van tus imágenes)</h2>
-</body>
-</html>
 
-    >
-      <source src="assets/inicio.mp4" type="video/mp4" />
-      <!-- Texto alternativo si el video no se carga -->
-      Tu navegador no soporta la reproducción de videos.
+<body>
+
+  <main class="menu-screen" aria-label="Menú principal">
+
+    <video class="menu-video" autoplay muted loop playsinline preload="auto">
+      <source src="./assets/hallway_loop.mp4" type="video/mp4">
     </video>
 
-    <!--
-      BOTÓN DE INICIO
-      - id="startButton": para manipularlo con JS.
-      - class="start-button": estilos del botón.
-      - aria-label: mejora accesibilidad (lector de pantalla).
-    -->
-    <button
-      id="startButton"
-      class="start-button"
-      aria-label="Iniciar aplicación"
-    >
-      Iniciar
-    </button>
+    <div class="menu-overlay"></div>
+
+    <div class="menu-center">
+      <div class="menu-panel">
+        <h1 class="menu-title">MENÚ PRINCIPAL</h1>
+        <p class="menu-note">Selecciona una opción</p>
+
+        <div class="menu-buttons">
+
+  <div class="menu-btn-wrap tall">
+  <a href="mapa.html">
+    <img src="./assets/jugar.png" class="menu-img-btn" alt="Jugar">
+  </a>
+</div>
+
+  <div class="menu-btn-wrap tall">
+    <img src="./assets/opciones.png" class="menu-img-btn" alt="Opciones">
+  </div>
+
+  <div class="menu-btn-wrap">
+    <img src="./assets/salir.png" class="menu-img-btn" alt="Salir">
+  </div>
+
+</div>
+
+
   </main>
 
-  <!-- Enlace al JS -->
-  <script src="script.js"></script>
+</body>
+</html>

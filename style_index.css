@@ -1,0 +1,69 @@
+.start-body{
+  margin: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.start-screen{
+  position: relative;
+  display: inline-block;
+}
+
+.start-screen .bg-video{
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+  z-index: 0;
+}
+
+.start-screen .overlay-dim{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.start-center{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.start-panel{
+  background: rgba(0,0,0,.35);
+  padding: 18px 22px;
+  border-radius: 16px;
+  backdrop-filter: blur(2px);
+}
+
+.start-img{
+  width: min(420px, 80%);
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.start-text{
+  margin-top: 12px;
+  opacity: .85;
+}
+
+.fade-out{
+  animation: fadeOut .45s ease forwards;
+}
+
+@keyframes fadeOut{
+  to{ opacity: 0; }
+}
