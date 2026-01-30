@@ -1,0 +1,24 @@
+html, body { height: 100%; margin: 0; font-family: system-ui, Arial; }
+.page-body{
+  display: grid;
+  place-items: center;
+  background: #0b0f14;
+  color: #fff;
+}
+
+.page-card{
+  width: min(720px, 92vw);
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.back-link{
+  display: inline-block;
+  margin-top: 16px;
+  color: #fff;
+  opacity: 0.9;
+  text-decoration: none;
+}
+.back-link:hover{ opacity: 1; text-decoration: underline; }

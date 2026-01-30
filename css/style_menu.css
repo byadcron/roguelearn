@@ -1,0 +1,155 @@
+html, body { height: 100%; margin: 0; }
+.menu-body{ overflow: hidden; font-family: system-ui, Arial; background: #000; }
+
+.menu-screen{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  isolation: isolate;
+}
+
+.bg-video{
+  position: absolute; inset: 0;
+  width: 50%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0;
+}
+
+.overlay-dim{
+  position: absolute; inset: 0;
+  z-index: 1;
+  background: rgba(0,0,0,0.45);
+}
+
+.menu-ui{
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+/* RECUADRO */
+.menu-card{
+  width: min(520px, 92vw);
+  padding: 18px 18px 22px;
+  border-radius: 22px;
+
+  /* Contraste oscuro que combina con pixel-art */
+  background: rgba(12, 16, 24, 0.78);
+  border: 2px solid rgba(255, 210, 120, 0.20); /* borde cálido */
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+}
+
+
+.menu-title{
+  margin: 0;
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  color: #fff;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.65);
+  letter-spacing: 1px;
+}
+
+.menu-subtitle{
+  margin: 0;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 6px 18px rgba(0,0,0,0.65);
+}
+/* Forzar que los labels se vean */
+.opt label{
+  color: #ffffff !important;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+}
+
+/* y el valor numérico */
+.opt-value{
+  color: rgba(255,255,255,0.92) !important;
+  font-weight: 900;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+}
+
+/* el subtítulo también, por si acaso */
+.menu-subtitle{
+  color: rgba(255,255,255,0.88) !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+}
+
+.menu-buttons{
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.btn-img img{
+  width: min(420px, 85vw);
+  height: auto;
+  display: block;
+  transition: transform 120ms ease, filter 120ms ease;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+.btn-img:hover img{ transform: scale(1.03); }
+.btn-img:active img{ transform: scale(0.98); }
+/* ===== OBJETOS ===== */
+
+.objects-card{
+  width: min(820px, 94vw);
+}
+
+.objects-grid{
+  margin-top: 12px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 620px){
+  .objects-grid{ grid-template-columns: 1fr; }
+}
+
+/* Card de objeto */
+.obj{
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: center;
+
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.obj img{
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,0.45));
+}
+
+/* Texto visible */
+.obj h3{
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 1.05rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+}
+
+.obj p{
+  margin: 0;
+  color: rgba(255,255,255,0.86);
+  font-size: 0.95rem;
+  line-height: 1.25;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.65);
+}
+
+.objects-actions{
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}

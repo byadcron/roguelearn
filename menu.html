@@ -1,61 +1,38 @@
 <!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Menú</title>
-  <link rel="stylesheet" href="style_menu.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menú principal</title>
+  <link rel="stylesheet" href="./css/style_menu.css" />
 </head>
 
-<body>
+<body class="menu-body">
+  <main class="menu-screen">
 
-  <main class="menu-screen" aria-label="Menú principal">
-
-    <video class="menu-video" autoplay muted loop playsinline preload="auto">
-      <source src="./assets/hallway_loop.mp4" type="video/mp4">
+    <video id="menuVideo" class="bg-video" autoplay muted loop playsinline preload="auto">
+      <source src="./assets/hallway_loop.mp4" type="video/mp4" />
     </video>
 
-    <div class="menu-overlay"></div>
+    <div class="overlay-dim"></div>
 
-    <div class="menu-center">
-      <div class="menu-panel">
-        <h1 class="menu-title">MENÚ PRINCIPAL</h1>
-        <p class="menu-note">Selecciona una opción</p>
+  <section class="menu-ui">
+  <div class="menu-card">
+    <h1 class="menu-title">MENÚ PRINCIPAL</h1>
+    <p class="menu-subtitle">Selecciona una opción</p>
 
-
-        <div class="menu-buttons">
-
-          <div class="menu-btn-wrap tall">
-            <a href="mapa.html">
-              <img src="./assets/jugar.png" class="menu-img-btn" alt="Jugar">
-            </a>
-          </div>
-
-          <div class="menu-btn-wrap tall">
-            <a href="objetos.html">
-              <img src="./assets/objetos.png" class="menu-img-btn menu-img-btn-large" alt="Objetos">
-            </a>
-          </div>
-
-
-          <div class="menu-btn-wrap tall">
-            <a href="opciones.html">
-              <img src="./assets/opciones.png" class="menu-img-btn" alt="Opciones">
-            </a>
-          </div>
-
-
-          <div class="menu-btn-wrap tall">
-            <img src="./assets/salir.png" class="menu-img-btn" alt="Salir">
-          </div>
-
-        </div>
-
-
+    <div class="menu-buttons">
+      <a class="btn-img" href="mapa.html"><img src="./assets/jugar.png" alt="Jugar"></a>
+      <a class="btn-img" href="opciones.html"><img src="./assets/opciones.png" alt="Opciones"></a>
+      <a class="btn-img" href="objetos.html"><img src="./assets/objetos.png" alt="Objetos"></a>
+      <a class="btn-img" href="salir.html"><img src="./assets/salir.png" alt="Salir"></a>
+    </div>
+  </div>
+</section>
 
   </main>
 
+  <script src="./js/config.js"></script>
+  <script src="./js/menu.js"></script>
 </body>
-
 </html>

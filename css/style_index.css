@@ -1,0 +1,109 @@
+/* /css/style_index.css */
+
+/* Reset */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+/* Body */
+.start-body{
+  background: #000;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Contenedor principal FULL SCREEN */
+.start-screen{
+  position: relative;
+  width: 100vw;
+  height: 100vh;      /* CLAVE: ocupa toda la pantalla */
+  overflow: hidden;
+  isolation: isolate; /* z-index seguro */
+}
+
+/* Video como fondo a pantalla completa */
+.bg-video{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 50vw;
+  height: 100vh;
+
+  transform: translate(-50%, -50%);
+
+  object-fit: cover;        /* llena la pantalla recortando si hace falta */
+  object-position: center;  /* ajusta si quieres: 50% 35% */
+
+  z-index: 0;
+  display: block;
+}
+
+
+
+/* Capa oscura encima del video */
+.overlay-dim{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+
+/* UI encima (abajo centrado) */
+.start-center{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;   /* abajo */
+  padding: 0 24px 10vh;    /* baja el panel (ajusta 6vh - 14vh) */
+  text-align: center;
+}
+
+/* Panel translúcido */
+.start-panel{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+
+/* Imagen de "presiona cualquier tecla" */
+.start-img{
+  width: min(760px, 92vw);
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+
+  /* pulso suave opcional */
+  animation: pulse 1.6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,0.55));
+}
+
+@keyframes pulse{
+  0%, 100% { transform: scale(1); opacity: 0.95; }
+  50%      { transform: scale(1.03); opacity: 1; }
+}
+
+/* Texto extra si lo usas en config */
+.start-text{
+  margin: 0;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  display: none;
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  .start-img{ animation: none; }
+}

@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio</title>
-  <link rel="stylesheet" href="style_index.css" />
-</head>
-
+  <link rel="stylesheet" href="./css/style_index.css" />
+  </head>
 <body class="start-body">
+
   <main id="screen" class="start-screen" aria-label="Pantalla de inicio">
     <video id="startVideo" class="bg-video" autoplay muted loop playsinline preload="auto">
       <source src="./assets/inicio.mp4" type="video/mp4" />
@@ -15,77 +15,16 @@
 
     <div class="overlay-dim"></div>
 
-<div class="start-center">
-  <div class="start-panel">
-    <img id="startImg" class="start-img" src="./assets/empezar.png"
-         alt="Presiona cualquier tecla para empezar" draggable="false" />
-    <p id="startText" class="start-text"></p>
-  </div>
-</div>
+    <div class="start-center">
+      <div class="start-panel">
+        <img id="startImg" class="start-img" src="./assets/empezar.png"
+             alt="Presiona cualquier tecla para empezar" draggable="false" />
+        <p id="startText" class="start-text"></p>
+      </div>
+    </div>
+  </main>
 
-
-
-  <script>
-    let cfg = {
-      start: {
-        video: "./assets/inicio.mp4",
-        overlayImage: "./assets/empezar.png",
-        overlayText: "",
-        next: "menu.html",
-        fadeMs: 450
-      }
-    };
-
-    let started = false;
-
-    async function loadConfig() {
-      try {
-        const r = await fetch("./config.json", { cache: "no-store" });
-        if (r.ok) cfg = await r.json();
-      } catch (_) {}
-    }
-
-    function applyConfig() {
-      const s = cfg.start || {};
-      const video = document.getElementById("startVideo");
-      const img = document.getElementById("startImg");
-      const text = document.getElementById("startText");
-
-      const src = (s.video || "./assets/inicio.mp4");
-      video.querySelector("source").src = src;
-      video.load();
-
-      img.src = s.overlayImage || "./assets/empezar.png";
-
-      const t = (s.overlayText || "").trim();
-      if (t) {
-        text.textContent = t;
-        text.style.display = "block";
-      } else {
-        text.style.display = "none";
-      }
-    }
-
-    function goNext() {
-      if (started) return;
-      started = true;
-
-      const screen = document.getElementById("screen");
-      screen.classList.add("fade-out");
-
-      const ms = Number(cfg?.start?.fadeMs ?? 450);
-      setTimeout(() => {
-        window.location.href = cfg?.start?.next || "menu.html";
-      }, ms);
-    }
-
-    (async () => {
-      await loadConfig();
-      applyConfig();
-
-      window.addEventListener("keydown", goNext, { once: true });
-      window.addEventListener("pointerdown", goNext, { once: true });
-    })();
-  </script>
+  <script src="./js/config.js"></script>
+  <script src="./js/index.js"></script>
 </body>
 </html>
