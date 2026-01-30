@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Objetos</title>
+  <link rel="stylesheet" href="style_objetos.css">
+</head>
+
+<body>
+
+  <main class="objects-screen" aria-label="Objetos del juego">
+
+    <video class="objects-video" autoplay muted loop playsinline preload="auto">
+      <source src="./assets/hallway_loop.mp4" type="video/mp4">
+    </video>
+
+    <div class="objects-overlay"></div>
+
+    <div class="objects-center">
+      <div class="objects-panel">
+
+        <h1 class="objects-title">OBJETOS</h1>
+        <p class="objects-note">Elementos disponibles en el escenario</p>
+
+        <div class="objects-grid">
+
+          <div class="object-card" data-id="linterna">
+            <img src="./assets/linterna.png" alt="Linterna">
+            <span>Linterna</span>
+          </div>
+
+          <div class="object-card" data-id="botiquin">
+            <img src="./assets/botiquin.png" alt="Botiquín">
+            <span>Botiquín</span>
+          </div>
+
+          <div class="object-card" data-id="credencial">
+            <img src="./assets/credencial.png" alt="Credencial">
+            <span>Credencial</span>
+          </div>
+
+          <div class="object-card" data-id="llave">
+            <img src="./assets/llave.png" alt="Llave">
+            <span>Llave</span>
+          </div>
+
+        </div>
+
+        <div class="object-info" id="objectInfo">
+          Selecciona un objeto para ver su descripción
+        </div>
+
+        <div class="objects-buttons">
+          <a href="menu.html" class="btn-back">VOLVER AL MENÚ</a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script src="objetos.js"></script>
+</body>
+</html>
