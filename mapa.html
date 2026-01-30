@@ -1,18 +1,28 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mapa</title>
-  <link rel="stylesheet" href="./css/style_pages.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RogueLearn - Escuela FPS</title>
+  <link rel="stylesheet" href="css/mapa.css">
 </head>
-<body class="page-body">
-  <main class="page-card">
-    <h1>MAPA</h1>
-    <p>Aquí irá tu mapa / lógica del juego.</p>
-    <a class="back-link" href="menu.html">⬅ Volver al menú</a>
-  </main>
+<body>
 
-  <script src="./js/pages.js"></script>
+  <canvas id="game"></canvas>
+  <canvas id="minimap" width="180" height="180"></canvas>
+
+  <div id="hud">
+    <span id="levelInfo">Nivel 1</span>
+  </div>
+
+  <div id="msg">Click para jugar · W A S D + Mouse · E = Interactuar</div>
+
+  <div id="dialog" class="hidden">
+    <h3 id="dialogTitle"></h3>
+    <div id="dialogText"></div>
+    <button id="dialogBtn">Continuar</button>
+  </div>
+
+  <script src="js/mapa.js?v=1"></script>
 </body>
 </html>
